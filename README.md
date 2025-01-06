@@ -45,4 +45,4 @@ This is a simple Java project that demonstrates basic bank account management wi
 ├── pom.xml
 └── README.md
 
-![img.jpg](img/img.jpg)
+![img.png](img/img.png)
