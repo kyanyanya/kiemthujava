@@ -1,29 +1,32 @@
-1. Mô tả mã nguồn
-   Tên file: BankAccount.java
+# Mô tả mã nguồn
+
+1. Tên file: BankAccount.java
    Mã nguồn bao gồm một lớp tên là BankAccount với các chức năng chính:
 
-- Các thành phần chính
-+,Thuộc tính:
+2. Các thành phần chính
 
-balance: Số dư tài khoản (kiểu double).
-+,Phương thức:
+- Thuộc tính:
+
+ balance: Số dư tài khoản (kiểu double).
+
+- Phương thức:
 
 .BankAccount(double initialBalance):
-Constructor khởi tạo tài khoản với số dư ban đầu.
-Ném ngoại lệ nếu số dư ban đầu là số âm.
+ Constructor khởi tạo tài khoản với số dư ban đầu.
+ Ném ngoại lệ nếu số dư ban đầu là số âm. 
 .deposit(double amount):
-Thêm tiền vào tài khoản.
-Ném ngoại lệ nếu số tiền gửi <= 0.
-.withdraw(double amount):
-Rút tiền từ tài khoản.
-Ném ngoại lệ nếu số tiền rút lớn hơn số dư hoặc <= 0.
-.getBalance():
-Trả về số dư hiện tại.
+ Thêm tiền vào tài khoản.
+ Ném ngoại lệ nếu số tiền gửi <= 0. 
+ .withdraw(double amount):
+ Rút tiền từ tài khoản.
+ Ném ngoại lệ nếu số tiền rút lớn hơn số dư hoặc <= 0. 
+ .getBalance():
+ Trả về số dư hiện tại. 
 
-- Ví dụ mã nguồn:
+3. Ví dụ mã nguồn:
 
 
-
+```java
 public class BankAccount {
 private double balance;
 
@@ -55,20 +58,23 @@ private double balance;
         return balance;
     }
 }
-2. Mô tả mã kiểm thử
-   Tên file: BankAccountTest.java
-   Mã kiểm thử được viết bằng JUnit 5, tập trung vào kiểm tra tính đúng đắn của từng phương thức trong lớp BankAccount.
+```
+# Mô tả mã kiểm thử
 
-- Các bài kiểm thử:
-+,testInitialBalance: Kiểm tra số dư ban đầu khi tạo tài khoản.
-+,testDeposit: Kiểm tra phương thức deposit khi gửi tiền hợp lệ.
-+,testWithdraw: Kiểm tra phương thức withdraw khi rút tiền hợp lệ.
-+,testWithdrawInsufficientBalance: Kiểm tra rút tiền vượt số dư.
-+,testNegativeDeposit: Kiểm tra gửi tiền giá trị âm.
-+,testNegativeInitialBalance: Kiểm tra khởi tạo tài khoản với số dư âm.
+- Tên file: BankAccountTest.java
+- Mã kiểm thử được viết bằng JUnit 5, tập trung vào kiểm tra tính đúng đắn của từng phương thức trong lớp BankAccount.
 
-- Ví dụ mã kiểm thử:
+1. Các bài kiểm thử:
+- testInitialBalance: Kiểm tra số dư ban đầu khi tạo tài khoản.
+- testDeposit: Kiểm tra phương thức deposit khi gửi tiền hợp lệ.
+- testWithdraw: Kiểm tra phương thức withdraw khi rút tiền hợp lệ.
+- testWithdrawInsufficientBalance: Kiểm tra rút tiền vượt số dư.
+- testNegativeDeposit: Kiểm tra gửi tiền giá trị âm.
+- testNegativeInitialBalance: Kiểm tra khởi tạo tài khoản với số dư âm.
 
+2. Ví dụ mã kiểm thử:
+
+```java
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -120,20 +126,26 @@ public class BankAccountTest {
         assertEquals("Initial balance cannot be negative.", exception.getMessage());
     }
 }
+```
 
-3. Kết quả chạy kiểm thử
+# Kết quả chạy kiểm thử
 - Khi chạy kiểm thử bằng  IDE (IntelliJ IDEA), bài kiểm thử sẽ được thực thi. Dưới đây là kết quả mẫu khi tất cả bài kiểm thử đều thành công.
 
 - Cách chạy kiểm thử bằng IDE: 
-+,Nhấp chuột phải vào file BankAccountTest và chọn Run Tests.
-+,Kết quả đầu ra
 
+ +, Nhấp chuột phải vào file BankAccountTest và chọn Run Tests.
+
+ +, Kết quả đầu ra
+
+```
 [INFO] Running BankAccountTest
 [INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
 [INFO] BUILD SUCCESS
+```
 
 # Cấu Trúc Hệ Thống 
 
+```
 .
 ├── src
 │   ├── main
@@ -144,7 +156,7 @@ public class BankAccountTest {
 │           └── BankAccountTest.java
 ├── pom.xml
 └── README.md
-
+```
 
 # Kết Quả 
 ![img.png](img/img.png)
