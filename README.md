@@ -10,19 +10,22 @@
  balance: Số dư tài khoản (kiểu double).
 
 - Phương thức:
-
+```
 .BankAccount(double initialBalance):
  Constructor khởi tạo tài khoản với số dư ban đầu.
  Ném ngoại lệ nếu số dư ban đầu là số âm. 
+ 
 .deposit(double amount):
  Thêm tiền vào tài khoản.
  Ném ngoại lệ nếu số tiền gửi <= 0. 
+ 
  .withdraw(double amount):
  Rút tiền từ tài khoản.
  Ném ngoại lệ nếu số tiền rút lớn hơn số dư hoặc <= 0. 
+ 
  .getBalance():
  Trả về số dư hiện tại. 
-
+```
 3. Ví dụ mã nguồn:
 
 
