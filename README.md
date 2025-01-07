@@ -1,39 +1,139 @@
-# Bank Account Management
+1. Mô tả mã nguồn
+   Tên file: BankAccount.java
+   Mã nguồn bao gồm một lớp tên là BankAccount với các chức năng chính:
 
-This is a simple Java project that demonstrates basic bank account management with functionalities such as deposit, withdraw, and balance checking. The project includes unit tests written using JUnit to ensure code reliability.
+- Các thành phần chính
++,Thuộc tính:
 
----
+balance: Số dư tài khoản (kiểu double).
++,Phương thức:
 
-## Features
+.BankAccount(double initialBalance):
+Constructor khởi tạo tài khoản với số dư ban đầu.
+Ném ngoại lệ nếu số dư ban đầu là số âm.
+.deposit(double amount):
+Thêm tiền vào tài khoản.
+Ném ngoại lệ nếu số tiền gửi <= 0.
+.withdraw(double amount):
+Rút tiền từ tài khoản.
+Ném ngoại lệ nếu số tiền rút lớn hơn số dư hoặc <= 0.
+.getBalance():
+Trả về số dư hiện tại.
 
-- **Create Bank Account**: Initialize an account with an initial balance.
-- **Deposit Money**: Add funds to the account.
-- **Withdraw Money**: Remove funds from the account, with checks for sufficient balance.
-- **Check Balance**: Retrieve the current account balance.
-- **Error Handling**: Handles invalid inputs such as negative values or over-withdrawal.
+- Ví dụ mã nguồn:
 
----
 
-## Getting Started
 
-### Prerequisites
+public class BankAccount {
+private double balance;
 
-- **Java Development Kit (JDK)**: Version 8 or later.
-- **Maven**: For dependency management.
-- **JUnit**: Included via Maven dependencies.
+    public BankAccount(double initialBalance) {
+        if (initialBalance < 0) {
+            throw new IllegalArgumentException("Initial balance cannot be negative.");
+        }
+        this.balance = initialBalance;
+    }
 
-### Setup
+    public void deposit(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Deposit amount must be positive.");
+        }
+        balance += amount;
+    }
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/kyanyanya/kiemthujava.git
-   cd bank-account-management
-2. Build the project using Maven:
-   mvn clean install
-3. Run the tests:
-   mvn test
+    public void withdraw(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Withdraw amount must be positive.");
+        }
+        if (amount > balance) {
+            throw new IllegalArgumentException("Insufficient balance.");
+        }
+        balance -= amount;
+    }
 
-# Project Structure
+    public double getBalance() {
+        return balance;
+    }
+}
+2. Mô tả mã kiểm thử
+   Tên file: BankAccountTest.java
+   Mã kiểm thử được viết bằng JUnit 5, tập trung vào kiểm tra tính đúng đắn của từng phương thức trong lớp BankAccount.
+
+- Các bài kiểm thử:
++,testInitialBalance: Kiểm tra số dư ban đầu khi tạo tài khoản.
++,testDeposit: Kiểm tra phương thức deposit khi gửi tiền hợp lệ.
++,testWithdraw: Kiểm tra phương thức withdraw khi rút tiền hợp lệ.
++,testWithdrawInsufficientBalance: Kiểm tra rút tiền vượt số dư.
++,testNegativeDeposit: Kiểm tra gửi tiền giá trị âm.
++,testNegativeInitialBalance: Kiểm tra khởi tạo tài khoản với số dư âm.
+
+- Ví dụ mã kiểm thử:
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class BankAccountTest {
+
+    @Test
+    public void testInitialBalance() {
+        BankAccount account = new BankAccount(1000);
+        assertEquals(1000, account.getBalance(), "Initial balance should be 1000.");
+    }
+
+    @Test
+    public void testDeposit() {
+        BankAccount account = new BankAccount(1000);
+        account.deposit(500);
+        assertEquals(1500, account.getBalance(), "Balance after deposit should be 1500.");
+    }
+
+    @Test
+    public void testWithdraw() {
+        BankAccount account = new BankAccount(1000);
+        account.withdraw(300);
+        assertEquals(700, account.getBalance(), "Balance after withdrawal should be 700.");
+    }
+
+    @Test
+    public void testWithdrawInsufficientBalance() {
+        BankAccount account = new BankAccount(1000);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            account.withdraw(1500);
+        });
+        assertEquals("Insufficient balance.", exception.getMessage());
+    }
+
+    @Test
+    public void testNegativeDeposit() {
+        BankAccount account = new BankAccount(1000);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            account.deposit(-500);
+        });
+        assertEquals("Deposit amount must be positive.", exception.getMessage());
+    }
+
+    @Test
+    public void testNegativeInitialBalance() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new BankAccount(-100);
+        });
+        assertEquals("Initial balance cannot be negative.", exception.getMessage());
+    }
+}
+
+3. Kết quả chạy kiểm thử
+- Khi chạy kiểm thử bằng  IDE (IntelliJ IDEA), bài kiểm thử sẽ được thực thi. Dưới đây là kết quả mẫu khi tất cả bài kiểm thử đều thành công.
+
+- Cách chạy kiểm thử bằng IDE: 
++,Nhấp chuột phải vào file BankAccountTest và chọn Run Tests.
++,Kết quả đầu ra
+
+[INFO] Running BankAccountTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+# Cấu Trúc Hệ Thống 
+
 .
 ├── src
 │   ├── main
@@ -45,4 +145,6 @@ This is a simple Java project that demonstrates basic bank account management wi
 ├── pom.xml
 └── README.md
 
+
+# Kết Quả 
 ![img.png](img/img.png)
